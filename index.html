@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Castaways Cove Presents: MUSA Futsal Tournament Series</title>
+    <style>
+        :root {
+            --primary: #0a4b7c;
+            --secondary: #dc2626;
+            --light: #f8fafc;
+            --dark: #0f172a;
+            --success: #16a34a;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        
+        /* Backdrop Configuration using your exact gym game photo */
+        body { 
+            background: linear-gradient(rgba(15, 23, 42, 0.55), rgba(15, 23, 42, 0.55)), 
+                        url('backdrop.jpg') no-repeat center center fixed; 
+            background-size: cover;
+            color: var(--dark); 
+            padding: 30px 15px; 
+            line-height: 1.6; 
+        }
+        
+        .container { max-width: 700px; margin: 0 auto; background: rgba(255, 255, 255, 0.97); padding: 35px; border-radius: 16px; box-shadow: 0 20px 40px rgba(0,0,0,0.35); backdrop-filter: blur(8px); }
+        
+        /* Dual Branding Logo Row Headers Layout Frame */
+        .branding-header { display: flex; justify-content: center; align-items: center; gap: 25px; margin-bottom: 20px; }
+        .logo-box { width: 110px; height: 110px; display: flex; align-items: center; justify-content: center; background: #fff; padding: 6px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        .logo-box img { max-width: 100%; max-height: 100%; object-fit: contain; }
+        
+        .header { text-align: center; margin-bottom: 25px; border-bottom: 3px solid var(--primary); padding-bottom: 15px; }
+        .header h1 { color: var(--primary); font-size: 1.6rem; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+        .header h2 { color: var(--secondary); font-size: 1.25rem; font-weight: 700; border: none; margin-bottom: 8px; padding-bottom: 0; }
+        .header p { color: #475569; font-size: 0.95rem; font-weight: 600; }
+        
+        .notice-banner { background: #f0fdf4; color: #166534; padding: 12px; border-radius: 6px; margin-bottom: 25px; border-left: 4px solid #4ade80; font-size: 0.9rem; font-weight: 500; text-align: center; }
+        
+        h3 { color: var(--primary); font-size: 1.15rem; margin-bottom: 12px; border-bottom: 1px solid #cbd5e1; padding-bottom: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .form-section { margin-bottom: 25px; }
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        @media(max-width: 600px) { .form-grid { grid-template-columns: 1fr; } }
+        .form-group { margin-bottom: 12px; }
+        .form-group.full-width { grid-column: span 2; }
+        @media(max-width: 600px) { .form-group.full-width { grid-column: span 1; } }
+        
+        label { display: block; margin-bottom: 4px; font-weight: 600; font-size: 0.85rem; color: #334155; }
+        input { width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 0.95rem; transition: border-color 0.2s; }
+        input:focus { outline: none; border-color: var(--primary); }
+        
+        /* Interactive 27-Option Checkbox Selection Framework Scrollbox */
+        .dates-instructions { font-size: 0.85rem; color: #64748b; margin-bottom: 10px; font-style: italic; }
+        .checkbox-scrollbox { display: grid; grid-template-columns: 1fr; gap: 8px; max-height: 280px; overflow-y: auto; border: 1px solid #cbd5e1; padding: 12px; border-radius: 8px; background: #f8fafc; }
+        .checkbox-item { display: flex; align-items: center; padding: 8px; border-radius: 4px; background: #fff; border: 1px solid #e2e8f0; cursor: pointer; transition: background 0.1s; }
+        .checkbox-item:hover { background: #f1f5f9; }
+        .checkbox-item input { width: auto; margin-right: 12px; transform: scale(1.2); cursor: pointer; }
+        .checkbox-label { font-size: 0.9rem; font-weight: 500; color: #1e293b; cursor: pointer; }
+        .timeslot-tag { font-size: 0.75rem; background: #e2e8f0; color: #475569; padding: 1px 6px; border-radius: 4px; margin-left: auto; font-weight: 600; }
+
+        /* Direct Contact Support Widget Display Frame */
+        .contact-box { background: #fffde6; border: 1px solid #fef08a; padding: 15px; border-radius: 8px; text-align: center; }
+        .contact-box p { font-size: 0.95rem; color: #451a03; margin-bottom: 4px; }
+        .contact-box a { color: var(--primary); font-weight: bold; text-decoration: none; font-size: 1.2rem; }
+        .contact-box a:hover { text-decoration: underline; }
+
+        .btn { display: inline-block; padding: 12px 20px; border: none; border-radius: 6px; font-weight: 700; cursor: pointer; transition: background 0.2s; font-size: 0.95rem; }
+        .btn-primary { background: var(--primary); color: #fff; width: 100%; padding: 14px; text-transform: uppercase; letter-spacing: 0.5px; box-shadow: 0 4px 6px rgba(10,75,124,0.15); }
+        .btn-primary:hover { background: #073457; }
+        .btn-secondary { background: #e2e8f0; color: var(--dark); }
+        
+        /* Modal Window Notification Layout Container */
+        .modal-overlay { display: none; position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(15, 23, 42, 0.7); justify-content: center; align-items: center; z-index: 1000; }
+        .modal { background: #fff; padding: 35px; border-radius: 12px; max-width: 480px; width: 90%; text-align: center; box-shadow: 0 25px 50px rgba(0,0,0,0.25); }
+        .modal h2 { color: var(--success); font-size: 1.6rem; margin-bottom: 10px; text-transform: uppercase; }
+        .code-box { background: #f1f5f9; border: 2px dashed #cbd5e1; padding: 12px; font-family: monospace; font-size: 1.35rem; font-weight: bold; letter-spacing: 2px; margin: 15px 0; color: var(--primary); }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- Brand Image Node Headers Layout Block mapping locally saved files -->
+    <div class="branding-header">
+        <div class="logo-box">
+            <img src="castaway-logo.png" alt="Playland's Castaway Cove Logo">
+        </div>
+        <div class="logo-box">
+            <img src="musa-logo.png" alt="MUSA Soccer Logo">
+        </div>
+    </div>
+
+    <div class="header">
+        <h1>Castaways Cove Presents</h1>
+        <h2>2026/27 MUSA Futsal Tournament Series</h2>
+        <p>📍 Played Live at Northfield Community School</p>
+    </div>
+
+    <div class="notice-banner">
+        🔒 Free Pre-Registration Portal — No Payment Required
+    </div>
+
+    <form id="registrationForm">
+        <!-- Section 1: Checkbox Selection for the 27 Tournaments -->
+        <div class="form-section">
+            <h3>1. Select Your Tournament Dates</h3>
+            <p class="dates-instructions">Select one or more tournament divisions to register your team:</p>
+            <div class="checkbox-scrollbox" id="datesContainer">
+                <!-- Data injection script builds rows from your exact 27-item text parameters list below -->
+            </div>
+        </div>
+
+        <!-- Section 2: Team & Coach Info Contact Configuration Boxes -->
+        <div class="form-section">
+            <h3>2. Team & Coach Details</h3>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="teamName">Team Name</label>
+                    <input type="text" id="teamName" required placeholder="e.g., Shore Elite FC">
+                </div>
+                <div class="form-group">
+                    <label for="clubAffiliation">Club Affiliation</label>
+                    <input type="text" id="clubAffiliation" required placeholder="e.g., Mainland United">
+                </div>
+                <div class="form-group">
+                    <label for="coachName">Head Coach Name</label>
+                    <input type="text" id="coachName" required placeholder="Full Name">
+                </div>
+                <div class="form-group">
+                    <label for="coachEmail">Coach Email Address</label>
+                    <input type="email" id="coachEmail" required placeholder="coach@example.com">
+                </div>
+                <div class="form-group full-width">
+                    <label for="coachPhone">Coach Phone Number</label>
+                    <input type="tel" id="coachPhone" required placeholder="(555) 555-5555">
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 3: Dan's Help Support Callout Panel Block -->
+        <div class="form-section">
+            <h3>3. Need Assistance?</h3>
+            <div class="contact-box">
+                <p>If you need anything, feel free to call or text:</p>
+                <a href="tel:258175993">Dan at 25 817 5993</a>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit Registration</button>
+    </form>
+</div>
+
+<!-- Automated Confirmation Code Popup Window Structure -->
+<div class="modal-overlay" id="successModal">
+    <div class="modal">
+        <h2>Registration Sent!</h2>
+        <p>Your spot has been held for the selected tournament dates. Check-in code:</p>
+        <div class="code-box" id="confirmationCode">MUSA-000000</div>
+        <p style="font-size: 0.85rem; color: #64748b; margin-bottom: 15px;">A log notice has been sent to Dan. See you at Northfield!</p>
+        <button type="button" class="btn btn-secondary" onclick="closeModal()">Close Window</button>
+    </div>
+</div>
+
+<script>
+    // Exact Custom 27-Date Chronological Schedule Configuration Parameters Matrix Mapping
+    const scheduleData = [
+        { date: "Nov 14", division: "U10/11 Girls" },
+        { date: "Nov 21", division: "U9 Boys" },
+        { date: "Dec 5", division: "U10 Boys" },
+        { date: "Dec 6", division: "U11 Boys" },
+        { date: "Dec 12", division: "U12 Boys" },
